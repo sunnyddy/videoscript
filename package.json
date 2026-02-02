@@ -1,0 +1,86 @@
+{
+  "name": "@videoscript/renderer",
+  "version": "1.0.1",
+  "description": "CLI tool for rendering VideoScript projects locally using Remotion",
+  "main": "./dist/cli/index.js",
+  "types": "./dist/cli/index.d.ts",
+  "bin": {
+    "videoscript": "./dist/bin/videoscript.js"
+  },
+  "files": [
+    "dist",
+    "src/remotion",
+    "remotion.config.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:remotion && npm run build:cli",
+    "build:cli": "tsup",
+    "build:remotion": "tsc -p tsconfig.remotion.json",
+    "clean": "rimraf dist",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build",
+    "test:render": "node dist/bin/videoscript.js render",
+    "lint": "eslint src --ext ts,tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "videoscript",
+    "remotion",
+    "video",
+    "rendering",
+    "cli",
+    "video-generation",
+    "dsl",
+    "ffmpeg",
+    "mp4"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sunnyddy/videoscript"
+  },
+  "homepage": "https://showsnote.com/videoscript",
+  "bugs": {
+    "url": "https://github.com/sunnyddy/videoscript/issues"
+  },
+  "author": "VideoScript Team",
+  "license": "MIT",
+  "dependencies": {
+    "@remotion/bundler": "^4.0.410",
+    "@remotion/cli": "^4.0.410",
+    "@remotion/renderer": "^4.0.410",
+    "remotion": "^4.0.0",
+    "commander": "^12.1.0",
+    "ora": "^8.1.1",
+    "chalk": "^5.3.0",
+    "adm-zip": "^0.5.16",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "version": "1.0.0",
+  "exportedAt": "2026-02-01T00:00:00.000Z",
+  "project": {
+    "id": "proj_example_123",
+    "name": "Sample Video Project",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "durationInFrames": 150,
+    "frames": [
+      {
+        "frameNumber": 0,
+        "elements": [
+          {
+            "prototypeId": "scenery_background",
+            "actionId": "default",
+            "position": { "x": 0, "y": 0 },
+            "zIndex": 0
+          },
+          {
+            "prototypeId": "char_hero",
+            "actionId": "idle",
+            "position": { "x": 960, "y": 540 },
+            "zIndex": 10
+          }
+        ]
+      },
+      {
+        "frameNumber": 30,
+        "elements": [
+          {
+            "prototypeId": "scenery_background",
+            "actionId": "default",
+            "position": { "x": 0, "y": 0 },
+            "zIndex": 0
+          },
+          {
+            "prototypeId": "char_hero",
+            "actionId": "walk",
+            "position": { "x": 1100, "y": 540 },
+            "zIndex": 10
+          }
+        ]
+      }
+    ],
+    "prototypesUsed": ["scenery_background", "char_hero"]
+  },
+  "prototypes": [
+    {
+      "id": "scenery_background",
+      "name": "Sky Background",
+      "type": "scenery",
+      "svg": "<svg width=\"1920\" height=\"1080\"><rect fill=\"#87CEEB\" width=\"1920\" height=\"1080\"/></svg>",
+      "actions": {
+        "default": {
+          "id": "default",
+          "name": "Default",
+          "keyframes": []
+        }
+      }
+    },
+    {
+      "id": "char_hero",
+      "name": "Hero Character",
+      "type": "character",
+      "svg": "<svg width=\"100\" height=\"100\"><circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"#FF6B6B\"/></svg>",
+      "appearance": {
+        "primaryColor": "#FF6B6B",
+        "scale": 1.0
+      },
+      "actions": {
+        "idle": {
+          "id": "idle",
+          "name": "Idle",
+          "keyframes": []
+        },
+        "walk": {
+          "id": "walk",
+          "name": "Walk",
+          "keyframes": [
+            {
+              "frame": 0,
+              "transform": { "rotation": 0, "scale": 1.0 }
+            },
+            {
+              "frame": 15,
+              "transform": { "rotation": 5, "scale": 1.1 }
+            },
+            {
+              "frame": 30,
+              "transform": { "rotation": 0, "scale": 1.0 }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "mediaFiles": []
+}
