@@ -12,6 +12,9 @@ interface PictureRendererProps {
     opacity?: number;
     filter?: { type: string; value: number };
   };
+  cssClassName?: string;
+  cssId?: string;
+  cssStyle?: React.CSSProperties;
 }
 
 /**
@@ -72,6 +75,9 @@ export const PictureRenderer: React.FC<PictureRendererProps> = ({
   position,
   frame,
   modifiers,
+  cssClassName,
+  cssId,
+  cssStyle,
 }) => {
   const pictureUrl = getPictureFrameUrl(prototype.pictureFrames, frame);
 
@@ -91,6 +97,8 @@ export const PictureRenderer: React.FC<PictureRendererProps> = ({
 
   return (
     <div
+      id={cssId}
+      className={cssClassName}
       style={{
         position: "absolute",
         left: position.x,
@@ -99,6 +107,7 @@ export const PictureRenderer: React.FC<PictureRendererProps> = ({
         transformOrigin: "center center",
         opacity,
         filter,
+        ...cssStyle,
       }}
     >
       <Img

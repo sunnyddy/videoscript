@@ -8,6 +8,9 @@ interface PropRendererProps {
   position: { x: number; y: number };
   frame: number;
   modifiers?: TraitModifiers;
+  cssClassName?: string;
+  cssId?: string;
+  cssStyle?: React.CSSProperties;
 }
 
 export const PropRenderer: React.FC<PropRendererProps> = ({
@@ -16,6 +19,9 @@ export const PropRenderer: React.FC<PropRendererProps> = ({
   position,
   frame,
   modifiers,
+  cssClassName,
+  cssId,
+  cssStyle,
 }) => {
   let transform = { x: 0, y: 0, rotation: 0, scale: 1 };
 
@@ -64,12 +70,15 @@ export const PropRenderer: React.FC<PropRendererProps> = ({
 
   return (
     <div
+      id={cssId}
+      className={cssClassName}
       style={{
         position: "absolute",
         left: position.x + transform.x,
         top: position.y + transform.y,
         transform: `rotate(${finalRotation}deg) scale(${finalScale})`,
         transformOrigin: "center center",
+        ...cssStyle,
       }}
     >
       <TraitWrapper modifiers={wrapperModifiers}>

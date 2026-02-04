@@ -36,6 +36,11 @@ export const FrameElementSchema = z.object({
       colors: z.array(z.string()),
     }).optional(),
   }).optional(),
+  // CSS support
+  cssClasses: z.array(z.string()).optional(),
+  cssId: z.string().optional(),
+  cssVars: z.record(z.string()).optional(),
+  inlineStyles: z.record(z.string()).optional(),
 });
 
 export type FrameElement = z.infer<typeof FrameElementSchema>;
@@ -51,6 +56,17 @@ export const FrameSchema = z.object({
 export type Frame = z.infer<typeof FrameSchema>;
 
 /**
+ * Zod schema for CSS stylesheet
+ */
+export const CSSStylesheetSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  content: z.string(),
+});
+
+export type CSSStylesheet = z.infer<typeof CSSStylesheetSchema>;
+
+/**
  * Zod schema for project
  */
 export const ProjectSchema = z.object({
@@ -60,8 +76,10 @@ export const ProjectSchema = z.object({
   width: z.number().min(1).max(7680),
   height: z.number().min(1).max(4320),
   durationInFrames: z.number().min(1),
+  background: z.string().optional(),
   frames: z.array(FrameSchema),
   prototypesUsed: z.array(z.string()),
+  cssStyles: z.array(CSSStylesheetSchema).optional(),
 });
 
 export type Project = z.infer<typeof ProjectSchema>;

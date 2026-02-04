@@ -1,6 +1,6 @@
 {
   "name": "@videoscript/renderer",
-  "version": "1.0.1",
+  "version": "1.0.23",
   "description": "CLI tool for rendering VideoScript projects locally using Remotion",
   "main": "./dist/cli/index.js",
   "types": "./dist/cli/index.d.ts",

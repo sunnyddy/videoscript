@@ -95,6 +95,18 @@ export interface FrameElement {
       colors: string[];
     };
   };
+  // CSS support
+  cssClasses?: string[];
+  cssId?: string;
+  cssVars?: Record<string, string>;
+  inlineStyles?: Record<string, string>;
+}
+
+// CSS Stylesheet for embedding in VideoProject
+export interface CSSStylesheet {
+  id: string;
+  name: string;
+  content: string;
 }
 
 export interface VideoProject {
@@ -104,8 +116,10 @@ export interface VideoProject {
   width: number;
   height: number;
   durationInFrames: number;
+  background?: string;
   frames: FrameComposition[];
   prototypesUsed: string[];
+  cssStyles?: CSSStylesheet[];
 }
 
 // Props for DynamicVideo - supports both static and dynamic loading

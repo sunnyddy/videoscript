@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import { renderCommand } from './commands/render';
+import { displayVersion, checkForUpdates } from './utils/version-check';
 import packageJson from '../package.json';
 
 /**
@@ -49,6 +50,14 @@ export function createProgram(): Command {
  * Run the CLI program
  */
 export async function run(argv: string[] = process.argv): Promise<void> {
+  // Display version and check for updates
+  displayVersion();
+
+  // Check for updates in the background (don't wait for it)
+  checkForUpdates().catch(() => {
+    // Silently fail
+  });
+
   const program = createProgram();
   await program.parseAsync(argv);
 }

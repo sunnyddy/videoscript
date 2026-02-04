@@ -180,6 +180,29 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
   // Create a lookup map for prototypes
   const prototypeMap = new Map(prototypes.map((p) => [p.id, p]));
 
+  // Helper to build CSS styles from element
+  const buildElementStyle = (element: FrameElement): React.CSSProperties => {
+    const style: React.CSSProperties = {};
+
+    // Apply CSS variables
+    if (element.cssVars) {
+      for (const [key, value] of Object.entries(element.cssVars)) {
+        (style as Record<string, string>)[key] = value;
+      }
+    }
+
+    // Apply inline styles
+    if (element.inlineStyles) {
+      for (const [key, value] of Object.entries(element.inlineStyles)) {
+        // Convert kebab-case to camelCase for React style objects
+        const camelKey = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+        (style as Record<string, string>)[camelKey] = value;
+      }
+    }
+
+    return style;
+  };
+
   const renderElement = (element: FrameElement, index: number) => {
     const prototype = prototypeMap.get(element.prototypeId);
 
@@ -187,6 +210,10 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
       console.warn(`Prototype not found: ${element.prototypeId}`);
       return null;
     }
+
+    // Build CSS styles
+    const cssStyle = buildElementStyle(element);
+    const cssClassName = element.cssClasses?.join(' ') || undefined;
 
     switch (prototype.type) {
       case 'character': {
@@ -201,6 +228,9 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
             frame={frame}
             customProps={element.customProps}
             modifiers={element.modifiers}
+            cssClassName={cssClassName}
+            cssId={element.cssId}
+            cssStyle={cssStyle}
           />
         );
       }
@@ -230,6 +260,9 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
             position={element.position}
             frame={frame}
             modifiers={element.modifiers}
+            cssClassName={cssClassName}
+            cssId={element.cssId}
+            cssStyle={cssStyle}
           />
         );
       }
@@ -243,6 +276,9 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
             position={element.position}
             frame={frame}
             modifiers={element.modifiers}
+            cssClassName={cssClassName}
+            cssId={element.cssId}
+            cssStyle={cssStyle}
           />
         );
       }
@@ -268,7 +304,7 @@ export const DynamicVideo: React.FC<DynamicVideoProps> = (props) => {
   };
 
   return (
-    <AbsoluteFill style={{ backgroundColor: '#000' }}>
+    <AbsoluteFill style={{ backgroundColor: project.background || '#000' }}>
       {sortedElements.map((element, index) => renderElement(element, index))}
     </AbsoluteFill>
   );

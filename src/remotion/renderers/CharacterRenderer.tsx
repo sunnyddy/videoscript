@@ -9,6 +9,9 @@ interface CharacterRendererProps {
   frame: number;
   customProps?: Record<string, unknown>;
   modifiers?: TraitModifiers;
+  cssClassName?: string;
+  cssId?: string;
+  cssStyle?: React.CSSProperties;
 }
 
 export const CharacterRenderer: React.FC<CharacterRendererProps> = ({
@@ -18,6 +21,9 @@ export const CharacterRenderer: React.FC<CharacterRendererProps> = ({
   frame,
   customProps,
   modifiers,
+  cssClassName,
+  cssId,
+  cssStyle,
 }) => {
   let transform = { x: 0, y: 0, rotation: 0, scale: 1 };
   let currentSvg = prototype.appearance.svg;
@@ -82,12 +88,15 @@ export const CharacterRenderer: React.FC<CharacterRendererProps> = ({
 
   return (
     <div
+      id={cssId}
+      className={cssClassName}
       style={{
         position: "absolute",
         left: position.x + transform.x,
         top: position.y + transform.y,
         transform: `rotate(${finalRotation}deg) scale(${finalScale})`,
         transformOrigin: "center center",
+        ...cssStyle,
       }}
     >
       <TraitWrapper modifiers={wrapperModifiers}>
